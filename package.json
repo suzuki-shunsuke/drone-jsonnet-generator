@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "precommit": "npm run vet && npm t && npm run lint",
+    "test": "go test ./... -covermode=atomic",
+    "fmt": "bash scripts/fmt.sh",
+    "vet": "go vet ./...",
+    "lint": "golangci-lint run",
+    "c": "bash scripts/coverage.sh",
+    "tag": "bash scripts/tag.sh"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-angular": "^6.1.3",
+    "husky": "^0.14.3"
+  }
+}
