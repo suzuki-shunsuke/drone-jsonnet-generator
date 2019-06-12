@@ -1,5 +1,7 @@
 # drone-jsonnet-generator
 
+[![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/suzuki-shunsuke/drone-jsonnet-generator/master/LICENSE)
+
 CLI tool to convert [Drone](https://drone.io/) v0.8x format .drone.yml to v1 format .drone.jsonnet
 
 When you migrate matrix build to multi machine pipeline,
