@@ -52,6 +52,7 @@ steps:
   when:
     event:
     - tag
+    - pull_request
 - name: release
   image: &goreleaser goreleaser/goreleaser:v0.109.0
   commands:
