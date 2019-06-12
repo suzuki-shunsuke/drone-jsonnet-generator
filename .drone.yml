@@ -32,6 +32,8 @@ steps:
   image: golangci/golangci-lint:v1.17.1
   commands:
   - golangci-lint run
+  environment:
+    GO111MODULE: on
 - name: codecov
   image: &image_go golang:1.12.5
   commands:
@@ -40,6 +42,7 @@ steps:
   - curl -s https://codecov.io/bash > /tmp/codecov.sh
   - test "$LOCAL" == "true" || bash /tmp/codecov.sh
   environment:
+    GO111MODULE: on
     CODECOV_TOKEN:
       from_secret: codecov_token
 - name: fetch tags
@@ -72,6 +75,8 @@ steps:
   image: *goreleaser
   commands:
   - goreleaser release --skip-publish
+  environment:
+    GO111MODULE: on
   when:
     event:
     - pull_request
