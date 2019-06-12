@@ -25,15 +25,15 @@ fi
 echo "cd `dirname $0`/.."
 cd `dirname $0`/..
 
-echo "create internal/domain/version.go"
-cat << EOS > internal/domain/version.go
+echo "create generator/domain/version.go"
+cat << EOS > generator/domain/version.go
 package domain
 
-// Version is the cube's version.
+// Version is the drone-jsonnet-generator's version.
 const Version = "$VERSION"
 EOS
 
-git add internal/domain/version.go
+git add generator/domain/version.go
 git commit -m "build: update version to $TAG"
 echo "git tag $TAG"
 git tag $TAG
