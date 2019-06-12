@@ -1,5 +1,10 @@
 # drone-jsonnet-generator
 
+[![Build Status](https://cloud.drone.io/api/badges/suzuki-shunsuke/drone-jsonnet-generator/status.svg)](https://cloud.drone.io/suzuki-shunsuke/drone-jsonnet-generator)
+[![codecov](https://codecov.io/gh/suzuki-shunsuke/drone-jsonnet-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/suzuki-shunsuke/drone-jsonnet-generator)
+[![Go Report Card](https://goreportcard.com/badge/github.com/suzuki-shunsuke/drone-jsonnet-generator)](https://goreportcard.com/report/github.com/suzuki-shunsuke/drone-jsonnet-generator)
+[![GitHub last commit](https://img.shields.io/github/last-commit/suzuki-shunsuke/drone-jsonnet-generator.svg)](https://github.com/suzuki-shunsuke/drone-jsonnet-generator)
+[![GitHub tag](https://img.shields.io/github/tag/suzuki-shunsuke/drone-jsonnet-generator.svg)](https://github.com/suzuki-shunsuke/drone-jsonnet-generator/releases)
 [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/suzuki-shunsuke/drone-jsonnet-generator/master/LICENSE)
 
 CLI tool to convert [Drone](https://drone.io/) v0.8x format .drone.yml to v1 format .drone.jsonnet

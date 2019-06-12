@@ -4,6 +4,7 @@ node_modules
 profile.out
 .coverage
 coverage.txt
+.drone.jsonnet
 
 # https://github.com/suzuki-shunsuke/git-rm-branch
 .git-rm-branch.yml
