@@ -216,6 +216,147 @@ OPTIONS:
    --stdout                  output generated jsonnet to stdout
 ```
 
+## Trouble shooting
+
+### yaml: unmarshal errors: cannot unmarshal !!map into string
+
+https://discourse.drone.io/t/drone-cli-drone-yaml-bug-drone-convert-command-is-faied-to-parse-drone-yml/5005
+
+If you use `include` or `exclude` in the step conditions about matrix builds, it is failed to generate the jsonnet file.
+
+```yaml
+---
+pipeline:
+  test:
+    image: alpine:3.9.4
+    commands:
+    - echo ${NAME}
+    when:
+      matrix:
+        include:  # failed to generate the jsonnet file
+          NAME: main
+matrix:
+  NAME:
+  - main
+  - foo
+```
+
+```console
+$ drone-jsonnet-generator gen
+yaml: unmarshal errors:
+  line 7: cannot unmarshal !!map into string
+```
+
+It is difficult to solve the problem, but there is a workaround.
+
+1. remove the conditions about matrix builds from .drone.yml temporarily
+2. generate the jsonnet file
+3. add the step conditions about matrix builds to the jsonnet file manually
+
+In case the above .drone.yml,
+
+1. remove the conditions about matrix builds from .drone.yml temporarily
+
+```yaml
+---
+pipeline:
+  test:
+    image: alpine:3.9.4
+    commands:
+    - echo ${NAME}
+matrix:
+  NAME:
+  - main
+  - foo
+```
+
+2. generate the jsonnet file
+
+```console
+$ drone-jsonnet-generator gen
+```
+
+generated jsonnet file
+
+```jsonnet
+local pipeline(NAME) = {
+  "kind": "pipeline",
+  "name": "'NAME:' + NAME",
+  "platform": {
+    "arch": "amd64",
+    "os": "linux"
+  },
+  "steps": [
+    {
+      "commands": [
+        "echo ${NAME}"
+      ],
+      "image": "alpine:3.9.4",
+      "name": "test",
+      "pull": "default"
+    }
+  ]
+};
+
+local array_NAME = [
+  "main",
+  "foo"
+];
+
+[
+  pipeline(NAME) for NAME in array_NAME 
+]
+```
+
+3. add the step conditions about matrix builds to the jsonnet file manually
+
+Unfortunately, it is difficult to automate this step.
+
+```jsonnet
+  "steps": [
+    (if NAME == "main" then
+    {
+      "commands": [
+        "echo ${NAME}"
+      ],
+      "image": "alpine:3.9.4",
+      "name": "test",
+      "pull": "default"
+    })
+  ]
+```
+
+```jsonnet
+local pipeline(NAME) = {
+  "kind": "pipeline",
+  "name": "'NAME:' + NAME",
+  "platform": {
+    "arch": "amd64",
+    "os": "linux"
+  },
+  "steps": [
+    (if NAME == "main" then
+    {
+      "commands": [
+        "echo ${NAME}"
+      ],
+      "image": "alpine:3.9.4",
+      "name": "test",
+      "pull": "default"
+    })
+  ]
+};
+
+local array_NAME = [
+  "main",
+  "foo"
+];
+
+[
+  pipeline(NAME) for NAME in array_NAME 
+]
+```
+
 ## Contribution
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) .
