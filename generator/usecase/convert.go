@@ -19,19 +19,6 @@ import (
 	"github.com/suzuki-shunsuke/drone-jsonnet-generator/generator/domain"
 )
 
-func validateArg(arg *domain.ConvertArg) error {
-	if arg == nil {
-		return errors.New("arg is nil")
-	}
-	if arg.Source == "" {
-		return errors.New("source is required")
-	}
-	if !arg.Stdout && arg.Target == "" {
-		return errors.New("target or stdout is required")
-	}
-	return nil
-}
-
 func Convert(arg *domain.ConvertArg) error {
 	if err := validateArg(arg); err != nil {
 		return err
@@ -112,11 +99,33 @@ func Convert(arg *domain.ConvertArg) error {
 	return genJSONNet(w, jsonV1, matrix, include)
 }
 
+func validateArg(arg *domain.ConvertArg) error {
+	if arg == nil {
+		return errors.New("arg is nil")
+	}
+	if arg.Source == "" {
+		return errors.New("source is required")
+	}
+	if !arg.Stdout && arg.Target == "" {
+		return errors.New("target or stdout is required")
+	}
+	return nil
+}
+
 func genJSONNet(w io.Writer, jsonV1 string, matrix map[string][]string, include []map[string]string) error {
 	if include == nil {
+		axes := make([]Axis, len(matrix))
+		i := 0
+		for k, v := range matrix {
+			axes[i] = Axis{
+				Name:   k,
+				Values: v,
+			}
+			i++
+		}
 		renderer := &MatrixRenderer{
 			Pipeline: jsonV1,
-			Matrix:   matrix,
+			Matrix:   axes,
 		}
 		tpl, err := template.New("matrix").Parse(domain.MatrixTemplate)
 		if err != nil {
@@ -124,9 +133,22 @@ func genJSONNet(w io.Writer, jsonV1 string, matrix map[string][]string, include 
 		}
 		return tpl.Execute(w, renderer)
 	}
+	axes := make([][]IncludeAxis, len(include))
+	for i, v := range include {
+		a := make([]IncludeAxis, len(v))
+		j := 0
+		for k, b := range v {
+			a[j] = IncludeAxis{
+				Name:  k,
+				Value: b,
+			}
+			j++
+		}
+		axes[i] = a
+	}
 	renderer := &IncludeRenderer{
 		Pipeline: jsonV1,
-		Include:  include,
+		Include:  axes,
 	}
 	tpl, err := template.New("include").Parse(domain.IncludeTemplate)
 	if err != nil {
