@@ -15,8 +15,11 @@ github.com/docker/go-connections v0.3.0/go.mod h1:Gbd7IOopHjR8Iph03tsViu4nIes5Xh
 github.com/docker/go-units v0.3.3 h1:Xk8S3Xj5sLGlG5g67hJmYMmUgXv5N4PhkjJHHqrwnTk=
 github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/drone/drone-runtime v1.0.5/go.mod h1:+osgwGADc/nyl40J0fdsf8Z09bgcBZXvXXnLOY48zYs=
+github.com/drone/drone-runtime v1.0.7-0.20190729202838-87c84080f4a1/go.mod h1:+osgwGADc/nyl40J0fdsf8Z09bgcBZXvXXnLOY48zYs=
 github.com/drone/drone-yaml v1.1.3 h1:fCtt8RcCQDyqHK5vbbMnTpwYoIspeDErhw4HNWN9I1I=
 github.com/drone/drone-yaml v1.1.3/go.mod h1:l/ehbHx9TGs4jgzhRnP5d+M9tmRsAmWyBHWAFEOXrk4=
+github.com/drone/drone-yaml v1.2.3 h1:SWzLmzr8ARhbtw1WsVDENa8WFY2Pi9l0FVMfafVUWz8=
+github.com/drone/drone-yaml v1.2.3/go.mod h1:QsqliFK8nG04AHFN9tTn9XJomRBQHD4wcejWW1uz/10=
 github.com/drone/signal v1.0.0/go.mod h1:S8t92eFT0g4WUgEc/LxG+LCuiskpMNsG0ajAMGnyZpc=
 github.com/ghodss/yaml v1.0.0 h1:wQHKEahhL6wmXdzwWG11gIVCkOv05bNOh+Rxn0yngAk=
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
