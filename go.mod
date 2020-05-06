@@ -3,7 +3,7 @@ module github.com/suzuki-shunsuke/drone-jsonnet-generator
 go 1.12
 
 require (
-	github.com/drone/drone-yaml v1.1.3
+	github.com/drone/drone-yaml v1.2.3
 	github.com/ghodss/yaml v1.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.5.1
